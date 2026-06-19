@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Lora } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ConvexClientProvider } from "./providers/convex-client-provider";
+import { ConvexClerkClientProvider } from "./providers/convex-clerk-client-provider";
 
 const loraHeading = Lora({ subsets: ["latin"], variable: "--font-heading" });
 
@@ -42,7 +42,12 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClerkClientProvider
+          convexUrl={process.env.NEXT_PUBLIC_CONVEX_URL!}
+          clerkPublishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}
+        >
+          {children}
+        </ConvexClerkClientProvider>
       </body>
     </html>
   );
