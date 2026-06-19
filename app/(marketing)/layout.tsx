@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/marketing-general/navbars/navbar";
 import React from "react";
 
 export default function MarketingLayout({
@@ -5,5 +6,10 @@ export default function MarketingLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 }
