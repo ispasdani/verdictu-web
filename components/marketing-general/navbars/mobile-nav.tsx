@@ -1,3 +1,5 @@
+"use client";
+
 import { CloseIcon } from "@/components/shared-components/close-icon";
 import { HamburgerIcon } from "@/components/shared-components/hamburger-icon";
 import { Logo } from "@/components/shared-components/logo";
