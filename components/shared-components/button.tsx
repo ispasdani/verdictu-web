@@ -34,8 +34,8 @@ export type ButtonProps = ButtonAsButton | ButtonAsAnchor | ButtonAsOther;
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: "h-9 px-4 text-sm",
-  md: "h-11 px-6 text-sm sm:text-base",
-  lg: "h-13 px-8 text-base sm:text-lg",
+  md: "h-10 px-6 text-sm sm:text-base",
+  lg: "h-11 px-8 text-base sm:text-lg",
 };
 
 export const Button = ({

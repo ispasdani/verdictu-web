@@ -1,6 +1,7 @@
+import { Button } from "@/components/shared-components/button";
 import { Logo } from "@/components/shared-components/logo";
 import { Text } from "@/components/shared-components/text";
-import { Button } from "@/components/ui/button";
+
 import Link from "next/link";
 
 export const DesktopNav = ({
@@ -21,7 +22,11 @@ export const DesktopNav = ({
         ))}
       </div>
       <div className="flex items-center gap-2">
-        <Button>Try it now</Button>
+        <Button variant="primary">
+          <Text size="sm" color="inverted" weight="light">
+            Get started
+          </Text>
+        </Button>
       </div>
     </div>
   );
