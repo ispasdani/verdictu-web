@@ -1,3 +1,9 @@
+import Herobox from "@/components/marketing-sections/hero/hero";
+
 export default function HomePage() {
-  return <div>Here</div>;
+  return (
+    <div>
+      <Herobox />
+    </div>
+  );
 }
