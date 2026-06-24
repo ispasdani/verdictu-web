@@ -5,8 +5,8 @@ const Herobox = () => {
   return (
     <div className="flex flex-col bg-green-300 min-h-[92vh]">
       <div className="flex flex-col">
-        <Text size={"4xl"}>Devoted to You.</Text>
-        <Text size={"2xl"}>Dangerous to Everyone Else.</Text>
+        <Text size={"6xl"}>Devoted to You.</Text>
+        <Text size={"5xl"}>Dangerous to Everyone Else.</Text>
         {/* <Text size={"md"} >We are a team of passionate developers, designers, and marketers who are dedicated to creating the best possible experience for our users. We believe that the best way to achieve this is by putting our users first and foremost in everything we do.</Text> */}
         <Text size={"md"}>
           Like the most loyal dog you've ever had — except it reads case law,
