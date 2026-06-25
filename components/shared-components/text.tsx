@@ -11,8 +11,11 @@ type TextSize =
   | "3xl"
   | "4xl"
   | "5xl"
-  | "6xl";
+  | "6xl"
+  | "9xl";
+
 type TextFont = "sans" | "inter" | "lora" | "mono";
+
 type TextWeight =
   | "thin"
   | "light"
@@ -21,6 +24,7 @@ type TextWeight =
   | "semibold"
   | "bold"
   | "extrabold";
+
 type TextColor =
   | "default"
   | "muted"
@@ -50,6 +54,7 @@ const sizeClasses: Record<TextSize, string> = {
   "4xl": "text-4xl",
   "5xl": "text-5xl",
   "6xl": "text-6xl",
+  "9xl": "text-9xl",
 };
 
 const weightClasses: Record<TextWeight, string> = {
