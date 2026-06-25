@@ -11,6 +11,8 @@ export const Container = <T extends React.ElementType = "div">({
 }) => {
   const Component = as || "div";
   return (
-    <Component className={cn("mx-auto px-10", className)}>{children}</Component>
+    <Component className={cn("mx-auto max-w-[140rem]", className)}>
+      {children}
+    </Component>
   );
 };

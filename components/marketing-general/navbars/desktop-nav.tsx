@@ -10,7 +10,7 @@ export const DesktopNav = ({
   items: { title: string; href: string }[];
 }) => {
   return (
-    <div className="hidden h-[8vh] w-full items-center justify-between px-4 py-4 md:flex">
+    <div className="hidden h-[8vh] w-full items-center justify-between py-4 md:flex">
       <div className="flex items-center gap-10">
         <Logo />
         {items.map((item) => (
