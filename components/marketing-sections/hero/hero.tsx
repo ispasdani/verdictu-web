@@ -1,6 +1,8 @@
+"use client";
+
 import { Button } from "@/components/shared-components/button";
 import { Text } from "@/components/shared-components/text";
-import { ArrowBigDown, ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 const Herobox = () => {
   return (
@@ -26,7 +28,15 @@ const Herobox = () => {
         </Button>
       </div>
       <div className="min-h-[57vh] bg-green-800 flex justify-center items-center">
-        <div className="w-[90%] h-[45vh] bg-red-300 rounded-md"></div>
+        <div className="w-[90%] h-[45vh] bg-red-300 rounded-md relative">
+          <Image
+            src={"/assets/images/hero-image.webp"}
+            alt="Hero Image"
+            fill
+            objectFit="cover"
+            className="rounded-md"
+          />
+        </div>
       </div>
     </div>
   );
