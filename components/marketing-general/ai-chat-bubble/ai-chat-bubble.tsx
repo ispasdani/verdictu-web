@@ -2,11 +2,30 @@
 
 import { ArrowUpIcon } from "@/components/shared-components/arrow-up-icon";
 import { Button } from "@/components/shared-components/button";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const CLAMP = 25;
+const STRENGTH = 0.06;
 
 export const AIChatBubble = () => {
   const [value, setValue] = useState("");
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const dx = (e.clientX - cx) * -STRENGTH;
+      const dy = (e.clientY - cy) * -STRENGTH;
+      setOffset({
+        x: Math.max(-CLAMP, Math.min(CLAMP, dx)),
+        y: Math.max(-CLAMP, Math.min(CLAMP, dy)),
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -25,7 +44,14 @@ export const AIChatBubble = () => {
   };
 
   return (
-    <div className="w-full max-w-[40vw] h-[20vh] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 ">
+    <div
+      className="w-full max-w-[40vw] h-[20vh] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3"
+      style={{
+        transform: `translate(${offset.x}px, ${offset.y}px)`,
+        transition: "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
+        willChange: "transform",
+      }}
+    >
       {/* Top row */}
       <div className="flex items-center justify-between font-[Inter,sans-serif] font-medium text-xs text-white">
         <div className="flex items-center gap-2">
@@ -48,7 +74,6 @@ export const AIChatBubble = () => {
             onChange={handleInput}
             onKeyDown={handleKeyDown}
             placeholder="Type question..."
-            rows={1}
             className="flex-1 border-none outline-none bg-transparent font-[Inter,sans-serif] text-base text-black py-[2px] px-0 resize-none max-h-32 overflow-y-auto leading-[1.5]"
           />
           <Button variant="icon-circle" aria-label="Send">
