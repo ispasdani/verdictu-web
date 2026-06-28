@@ -1,7 +1,7 @@
 import { AIChatBubble } from "@/components/marketing-general/ai-chat-bubble/ai-chat-bubble";
 import { Button } from "@/components/shared-components/button";
 import { Text } from "@/components/shared-components/text";
-import Image from "next/image";
+import { HeroVideo } from "./hero-video";
 
 const Herobox = () => {
   return (
@@ -28,13 +28,7 @@ const Herobox = () => {
       </div>
       <div className="min-h-[50vh] flex justify-center items-start relative">
         <div className="w-full h-[45vh] rounded-md relative">
-          <Image
-            src={"/assets/images/hero-image.webp"}
-            alt="Hero Image"
-            fill
-            objectFit="cover"
-            className="rounded-md"
-          />
+          <HeroVideo />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full px-6 flex justify-center">
           <AIChatBubble />
