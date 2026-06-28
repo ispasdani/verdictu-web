@@ -45,7 +45,7 @@ export const AIChatBubble = () => {
 
   return (
     <div
-      className="w-full max-w-[40vw] h-[20vh] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3"
+      className="w-full max-w-[50vw] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
       style={{
         transform: `translate(${offset.x}px, ${offset.y}px)`,
         transition: "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",

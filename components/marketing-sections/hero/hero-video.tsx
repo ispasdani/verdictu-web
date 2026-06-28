@@ -55,7 +55,7 @@ export function HeroVideo() {
     <div className="relative w-full h-full rounded-md overflow-hidden">
       <video
         ref={videoRef}
-        src="/assets/videos/hero-video.mp4"
+        src="/assets/videos/hero-video.mov"
         autoPlay
         muted
         playsInline
