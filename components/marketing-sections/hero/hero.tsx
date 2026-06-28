@@ -3,6 +3,52 @@
 import { Button } from "@/components/shared-components/button";
 import { Text } from "@/components/shared-components/text";
 import Image from "next/image";
+import { useState, useRef } from "react";
+
+function AIChatInput() {
+  const [value, setValue] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value);
+    const el = textareaRef.current;
+    if (el) {
+      el.style.height = "auto";
+      el.style.height = `${el.scrollHeight}px`;
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      // handle submit
+    }
+  };
+
+  return (
+    <div className="flex items-end gap-2 w-full max-w-2xl bg-white rounded-2xl px-4 py-3 shadow-lg border border-gray-200">
+      <textarea
+        ref={textareaRef}
+        value={value}
+        onChange={handleInput}
+        onKeyDown={handleKeyDown}
+        placeholder="Ask anything..."
+        rows={1}
+        className="flex-1 resize-none bg-transparent outline-none font-sans text-sm text-gray-800 placeholder-gray-400 leading-6 max-h-48 overflow-y-auto"
+        style={{ fontFamily: "'Inter', sans-serif" }}
+      />
+      <button
+        className="shrink-0 bg-black text-white rounded-xl p-2 hover:bg-gray-800 transition-colors disabled:opacity-40"
+        disabled={!value.trim()}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="19" x2="12" y2="5" />
+          <polyline points="5 12 12 5 19 12" />
+        </svg>
+      </button>
+    </div>
+  );
+}
 
 const Herobox = () => {
   return (
@@ -27,7 +73,7 @@ const Herobox = () => {
           </Text>
         </Button>
       </div>
-      <div className="min-h-[57vh] bg-green-800 flex justify-center items-center">
+      <div className="min-h-[57vh] bg-green-800 flex justify-center items-center relative">
         <div className="w-full h-[45vh] bg-red-300 rounded-md relative">
           <Image
             src={"/assets/images/hero-image.webp"}
@@ -36,6 +82,9 @@ const Herobox = () => {
             objectFit="cover"
             className="rounded-md"
           />
+        </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full px-6 flex justify-center">
+          <AIChatInput />
         </div>
       </div>
     </div>
