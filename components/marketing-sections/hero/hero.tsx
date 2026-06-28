@@ -5,6 +5,36 @@ import { Text } from "@/components/shared-components/text";
 import Image from "next/image";
 import { useState, useRef } from "react";
 
+function ActionButton({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <button
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        background: "#f3f3f3",
+        border: "none",
+        borderRadius: 6,
+        padding: "6px 10px",
+        cursor: "pointer",
+        fontFamily: "'Inter', sans-serif",
+        fontWeight: 500,
+        fontSize: 13,
+        color: "#6b7280",
+      }}
+    >
+      {icon}
+      {label}
+    </button>
+  );
+}
+
 function AIChatInput() {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -26,26 +56,155 @@ function AIChatInput() {
   };
 
   return (
-    <div className="flex items-end gap-2 w-full max-w-2xl bg-white rounded-2xl px-4 py-3 shadow-lg border border-gray-200">
-      <textarea
-        ref={textareaRef}
-        value={value}
-        onChange={handleInput}
-        onKeyDown={handleKeyDown}
-        placeholder="Ask anything..."
-        rows={1}
-        className="flex-1 resize-none bg-transparent outline-none font-sans text-sm text-gray-800 placeholder-gray-400 leading-6 max-h-48 overflow-y-auto"
-        style={{ fontFamily: "'Inter', sans-serif" }}
-      />
-      <button
-        className="shrink-0 bg-black text-white rounded-xl p-2 hover:bg-gray-800 transition-colors disabled:opacity-40"
-        disabled={!value.trim()}
+    <div
+      style={{
+        width: "100%",
+        maxWidth: 728,
+        borderRadius: 18,
+        background: "rgba(255,255,255,0.15)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        boxSizing: "border-box",
+        padding: 16,
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+      }}
+    >
+      {/* Top row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: 500,
+          fontSize: 12,
+          color: "#ffffff",
+        }}
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="12" y1="19" x2="12" y2="5" />
-          <polyline points="5 12 12 5 19 12" />
-        </svg>
-      </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span>60/450 credits</span>
+          <button
+            style={{
+              background: "#4ade80",
+              color: "#1a1a1a",
+              border: "none",
+              borderRadius: 999,
+              padding: "3px 10px",
+              cursor: "pointer",
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 500,
+              fontSize: 12,
+            }}
+          >
+            Upgrade
+          </button>
+        </div>
+        <span style={{ fontSize: 12 }}>✦ Powered by Claude</span>
+      </div>
+
+      {/* White input card */}
+      <div
+        style={{
+          background: "#ffffff",
+          borderRadius: 12,
+          boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+          boxSizing: "border-box",
+          padding: 12,
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+        }}
+      >
+        {/* Textarea + submit */}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={handleInput}
+            onKeyDown={handleKeyDown}
+            placeholder="Type question..."
+            rows={1}
+            style={{
+              flex: 1,
+              border: "none",
+              outline: "none",
+              background: "transparent",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 16,
+              color: "#000000",
+              padding: "2px 0",
+              resize: "none",
+              maxHeight: "8rem",
+              overflowY: "auto",
+              lineHeight: "1.5",
+            }}
+          />
+          <button
+            aria-label="Submit"
+            style={{
+              flexShrink: 0,
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              background: "#000000",
+              border: "none",
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="12" y1="19" x2="12" y2="5" />
+              <polyline points="5 12 12 5 19 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bottom row: actions + counter */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <ActionButton
+              icon={<span style={{ fontSize: 14 }}>📎</span>}
+              label="Attach"
+            />
+            <ActionButton
+              icon={<span style={{ fontSize: 14 }}>🎙</span>}
+              label="Voice"
+            />
+            <ActionButton
+              icon={<span style={{ fontSize: 14 }}>🔍</span>}
+              label="Prompts"
+            />
+          </div>
+          <span
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 12,
+              color: "#9b9b9b",
+            }}
+          >
+            {value.length}/3,000
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
