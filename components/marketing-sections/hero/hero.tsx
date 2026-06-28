@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Herobox = () => {
   return (
-    <div className="flex flex-col bg-green-300 min-h-[92vh] mx-auto max-w-[140rem]">
-      <div className="min-h-[35vh] bg-amber-200 flex flex-col items-start justify-center">
+    <div className="flex flex-col min-h-[92vh] mx-auto max-w-[140rem]">
+      <div className="min-h-[35vh] flex flex-col items-start justify-center">
         <Text size={"8xl"} font="lora" className="my-1">
           Devoted to You.
         </Text>
@@ -26,8 +26,8 @@ const Herobox = () => {
           </Text>
         </Button>
       </div>
-      <div className="min-h-[57vh] bg-green-800 flex justify-center items-center relative">
-        <div className="w-full h-[45vh] bg-red-300 rounded-md relative">
+      <div className="min-h-[50vh] flex justify-center items-start relative">
+        <div className="w-full h-[45vh] rounded-md relative">
           <Image
             src={"/assets/images/hero-image.webp"}
             alt="Hero Image"
