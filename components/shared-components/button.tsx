@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 type ButtonSize = "sm" | "md" | "lg";
-type ButtonVariant = "primary" | "secondary" | "link";
+type ButtonVariant = "primary" | "secondary" | "link" | "icon-circle";
 
 type ButtonBaseProps = {
   children: React.ReactNode;
@@ -48,6 +48,37 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const Component = (as ?? "button") as React.ElementType;
+
+  if (variant === "icon-circle") {
+    return (
+      <Component
+        aria-label={props["aria-label"] ?? "Submit"}
+        {...props}
+        className={cn(
+          "group inline-flex h-9 w-9 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border-none bg-black transition-colors duration-200 hover:bg-neutral-800",
+          className,
+        )}
+      >
+        <span className="transition-transform duration-200 group-hover:rotate-90">
+          {children ?? (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="12" y1="19" x2="12" y2="5" />
+              <polyline points="5 12 12 5 19 12" />
+            </svg>
+          )}
+        </span>
+      </Component>
+    );
+  }
 
   if (variant === "link") {
     return (

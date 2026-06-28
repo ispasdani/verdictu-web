@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowUpIcon } from "@/components/shared-components/arrow-up-icon";
 import { Button } from "@/components/shared-components/button";
 import { Text } from "@/components/shared-components/text";
 import Image from "next/image";
@@ -141,35 +142,9 @@ function AIChatInput() {
               lineHeight: "1.5",
             }}
           />
-          <button
-            aria-label="Submit"
-            style={{
-              flexShrink: 0,
-              width: 36,
-              height: 36,
-              borderRadius: "50%",
-              background: "#000000",
-              border: "none",
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="12" y1="19" x2="12" y2="5" />
-              <polyline points="5 12 12 5 19 12" />
-            </svg>
-          </button>
+          <Button variant="icon-circle" aria-label="Send">
+            <ArrowUpIcon />
+          </Button>
         </div>
 
         {/* Bottom row: actions + counter */}
