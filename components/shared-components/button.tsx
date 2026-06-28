@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 type ButtonSize = "sm" | "md" | "lg";
-type ButtonVariant = "primary" | "secondary" | "link" | "icon-circle";
+type ButtonVariant = "primary" | "secondary" | "link" | "icon-circle" | "action";
 
 type ButtonBaseProps = {
   children: React.ReactNode;
@@ -9,6 +9,8 @@ type ButtonBaseProps = {
   size?: ButtonSize;
   /** Override the background color for the primary variant (any Tailwind bg-* class) */
   bgColor?: string;
+  /** Icon rendered to the left of the text in the "action" variant */
+  icon?: React.ReactNode;
   className?: string;
 };
 
@@ -43,6 +45,7 @@ export const Button = ({
   variant = "primary",
   size = "md",
   bgColor,
+  icon,
   className,
   as,
   ...props
@@ -76,6 +79,21 @@ export const Button = ({
             </svg>
           )}
         </span>
+      </Component>
+    );
+  }
+
+  if (variant === "action") {
+    return (
+      <Component
+        {...props}
+        className={cn(
+          "inline-flex cursor-pointer items-center gap-1.5 rounded-md border-none bg-neutral-100 px-2.5 py-1.5 font-['Inter',sans-serif] text-[13px] font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-200",
+          className,
+        )}
+      >
+        {icon && <span className="flex-shrink-0">{icon}</span>}
+        {children}
       </Component>
     );
   }
