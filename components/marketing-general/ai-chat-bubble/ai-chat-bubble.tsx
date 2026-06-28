@@ -25,69 +25,22 @@ export const AIChatBubble = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        maxWidth: 728,
-        borderRadius: 18,
-        background: "rgba(255,255,255,0.15)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        boxSizing: "border-box",
-        padding: 16,
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}
-    >
+    <div className="w-full max-w-[728px] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3">
       {/* Top row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          fontFamily: "'Inter', sans-serif",
-          fontWeight: 500,
-          fontSize: 12,
-          color: "#ffffff",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <div className="flex items-center justify-between font-[Inter,sans-serif] font-medium text-xs text-white">
+        <div className="flex items-center gap-2">
           <span>60/450 credits</span>
-          <button
-            style={{
-              background: "#4ade80",
-              color: "#1a1a1a",
-              border: "none",
-              borderRadius: 999,
-              padding: "3px 10px",
-              cursor: "pointer",
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 500,
-              fontSize: 12,
-            }}
-          >
+          <button className="bg-[#4ade80] text-[#1a1a1a] border-none rounded-full px-[10px] py-[3px] cursor-pointer font-[Inter,sans-serif] font-medium text-xs">
             Upgrade
           </button>
         </div>
-        <span style={{ fontSize: 12 }}>✦ Powered by Claude</span>
+        <span className="text-xs">✦ Powered by Claude</span>
       </div>
 
       {/* White input card */}
-      <div
-        style={{
-          background: "#ffffff",
-          borderRadius: 12,
-          boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-          boxSizing: "border-box",
-          padding: 12,
-          display: "flex",
-          flexDirection: "column",
-          gap: 10,
-        }}
-      >
+      <div className="bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] box-border p-3 flex flex-col gap-[10px]">
         {/* Textarea + submit */}
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+        <div className="flex items-start gap-2">
           <textarea
             ref={textareaRef}
             value={value}
@@ -95,20 +48,7 @@ export const AIChatBubble = () => {
             onKeyDown={handleKeyDown}
             placeholder="Type question..."
             rows={1}
-            style={{
-              flex: 1,
-              border: "none",
-              outline: "none",
-              background: "transparent",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 16,
-              color: "#000000",
-              padding: "2px 0",
-              resize: "none",
-              maxHeight: "8rem",
-              overflowY: "auto",
-              lineHeight: "1.5",
-            }}
+            className="flex-1 border-none outline-none bg-transparent font-[Inter,sans-serif] text-base text-black py-[2px] px-0 resize-none max-h-32 overflow-y-auto leading-[1.5]"
           />
           <Button variant="icon-circle" aria-label="Send">
             <ArrowUpIcon />
@@ -116,43 +56,31 @@ export const AIChatBubble = () => {
         </div>
 
         {/* Bottom row: actions + counter */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <Button
               variant="action"
-              icon={<span style={{ fontSize: 14 }}>📎</span>}
+              icon={<span className="text-sm">📎</span>}
               label="Attach"
             >
               Attach
             </Button>
             <Button
               variant="action"
-              icon={<span style={{ fontSize: 14 }}>🎙</span>}
+              icon={<span className="text-sm">🎙</span>}
               label="Voice"
             >
               Voice
             </Button>
             <Button
               variant="action"
-              icon={<span style={{ fontSize: 14 }}>🔍</span>}
+              icon={<span className="text-sm">🔍</span>}
               label="Prompts"
             >
               Prompts
             </Button>
           </div>
-          <span
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 12,
-              color: "#9b9b9b",
-            }}
-          >
+          <span className="font-[Inter,sans-serif] text-xs text-[#9b9b9b]">
             {value.length}/3,000
           </span>
         </div>
