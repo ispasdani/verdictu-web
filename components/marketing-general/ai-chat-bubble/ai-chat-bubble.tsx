@@ -25,11 +25,12 @@ export const AIChatBubble = () => {
   };
 
   return (
-    <div className="w-full max-w-[728px] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3">
+    <div className="w-full max-w-[40vw] h-[20vh] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 ">
       {/* Top row */}
       <div className="flex items-center justify-between font-[Inter,sans-serif] font-medium text-xs text-white">
         <div className="flex items-center gap-2">
-          <span>60/450 credits</span>
+          {/* this is going to be added later on the dahsboard ai chat bubble */}
+          {/* <span>60/450 credits</span> */}
           <button className="bg-[#4ade80] text-[#1a1a1a] border-none rounded-full px-[10px] py-[3px] cursor-pointer font-[Inter,sans-serif] font-medium text-xs">
             Upgrade
           </button>
@@ -38,7 +39,7 @@ export const AIChatBubble = () => {
       </div>
 
       {/* White input card */}
-      <div className="bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] box-border p-3 flex flex-col gap-[10px]">
+      <div className="bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.12)] box-border p-3 flex flex-col justify-between gap-[10px] h-full">
         {/* Textarea + submit */}
         <div className="flex items-start gap-2">
           <textarea

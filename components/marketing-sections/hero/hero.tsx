@@ -36,7 +36,7 @@ const Herobox = () => {
             className="rounded-md"
           />
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full px-6 flex justify-center">
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-full px-6 flex justify-center">
           <AIChatBubble />
         </div>
       </div>
