@@ -7,7 +7,7 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex flex-col justify-center mx-20">
       <Navbar />
       {children}
     </div>
