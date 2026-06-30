@@ -2,6 +2,8 @@
 
 import { ArrowUpIcon } from "@/components/shared-components/arrow-up-icon";
 import { Button } from "@/components/shared-components/button";
+import MarqueeRow from "@/components/marketing-sections/hero/marquee-row";
+import { BOTTOM_PROMPTS } from "@/data/marquee-data";
 import { useEffect, useRef, useState } from "react";
 
 const CLAMP = 25;
@@ -45,13 +47,14 @@ export const AIChatBubble = () => {
 
   return (
     <div
-      className="w-full max-w-[50vw] rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
+      className="w-full max-w-[50vw] flex flex-col gap-3"
       style={{
         transform: `translate(${offset.x}px, ${offset.y}px)`,
         transition: "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
         willChange: "transform",
       }}
     >
+    <div className="rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)]">
       {/* Top row */}
       <div className="flex items-center justify-between font-[Inter,sans-serif] font-medium text-xs text-white">
         <div className="flex items-center gap-2">
@@ -112,5 +115,31 @@ export const AIChatBubble = () => {
         </div>
       </div>
     </div>
+
+    {/* Marquee — same glass shell, moves with the bubble */}
+    <div className="rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border py-3 overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.25)]">
+      <MarqueeRow prompts={BOTTOM_PROMPTS} direction="right" durationSec={38} />
+    </div>
+
+    <style>{`
+      @keyframes pm-scroll-left {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      @keyframes pm-scroll-right {
+        from { transform: translateX(-50%); }
+        to   { transform: translateX(0); }
+      }
+      .pm-track-left {
+        animation: pm-scroll-left var(--pm-duration) linear infinite;
+      }
+      .pm-track-right {
+        animation: pm-scroll-right var(--pm-duration) linear infinite;
+      }
+      .pm-row:hover .pm-track {
+        animation-play-state: paused;
+      }
+    `}</style>
+  </div>
   );
 };
