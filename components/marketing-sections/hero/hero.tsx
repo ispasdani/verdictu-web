@@ -6,7 +6,7 @@ import { Text } from "@/components/shared-components/text";
 const Herobox = () => {
   return (
     <div className="flex flex-col min-h-[92vh] mx-auto max-w-[140rem]">
-      <div className="min-h-[35vh] flex flex-col items-start justify-center">
+      <div className="min-h-[30vh] mb-15 flex flex-col items-start justify-center">
         <Text size={"8xl"} font="lora" className="my-1">
           Devoted to You.
         </Text>
