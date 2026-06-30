@@ -54,6 +54,11 @@ export const AIChatBubble = () => {
         willChange: "transform",
       }}
     >
+    {/* Marquee — same glass shell, moves with the bubble */}
+    <div className="rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border py-3 overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.25)]">
+      <MarqueeRow prompts={BOTTOM_PROMPTS} direction="right" durationSec={38} />
+    </div>
+
     <div className="rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border p-4 flex flex-col gap-3 shadow-[0_8px_40px_rgba(0,0,0,0.35)]">
       {/* Top row */}
       <div className="flex items-center justify-between font-[Inter,sans-serif] font-medium text-xs text-white">
@@ -114,11 +119,6 @@ export const AIChatBubble = () => {
           </span>
         </div>
       </div>
-    </div>
-
-    {/* Marquee — same glass shell, moves with the bubble */}
-    <div className="rounded-[18px] bg-white/15 backdrop-blur-[16px] box-border py-3 overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.25)]">
-      <MarqueeRow prompts={BOTTOM_PROMPTS} direction="right" durationSec={38} />
     </div>
 
     <style>{`

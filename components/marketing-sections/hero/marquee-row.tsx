@@ -1,5 +1,7 @@
 "use client";
 
+import { Text } from "@/components/shared-components/text";
+
 interface MarqueeRowProps {
   prompts: string[];
   direction?: "left" | "right";
@@ -31,7 +33,9 @@ export default function MarqueeRow({
             onClick={() => onPick?.(prompt)}
             className="bg-white whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-medium text-white/80 hover:bg-white/20 hover:text-white transition-colors cursor-pointer border border-white/10"
           >
-            {prompt}
+            <Text size="xs" color="default" weight="light">
+              {prompt}
+            </Text>
           </button>
         ))}
       </div>
