@@ -5,7 +5,7 @@ import { Text } from "@/components/shared-components/text";
 
 const Herobox = () => {
   return (
-    <div className="flex flex-col min-h-[92vh] w-full ">
+    <div className="flex flex-col min-h-[50vh] w-full">
       <div className="min-h-[30vh] mb-15 flex flex-col items-start justify-center">
         <Text size={"8xl"} font="lora" className="my-1">
           Devoted to You.
@@ -27,7 +27,7 @@ const Herobox = () => {
         </Button>
       </div>
       <div className="min-h-[50vh] flex justify-center items-start relative">
-        <div className="w-full h-[45vh] rounded-md relative">
+        <div className="w-full h-[50vh] rounded-md relative">
           <Image
             src={"/assets/images/hero-image.webp"}
             alt="Hero Image"
