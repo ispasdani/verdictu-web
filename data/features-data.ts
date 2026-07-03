@@ -1,5 +1,15 @@
 import type { LucideIcon } from "lucide-react";
-import { Brain, FileText, Ghost, Scale, Shield, Workflow } from "lucide-react";
+import {
+  Brain,
+  FileText,
+  Ghost,
+  GitBranch,
+  ScanEye,
+  Scale,
+  Shield,
+  Target,
+  Workflow,
+} from "lucide-react";
 
 export type Feature = {
   id: string;
@@ -63,5 +73,32 @@ export const FEATURES: Feature[] = [
       "Chain research, drafting, and review into multi-step workflows that run without you.",
     fullDescription:
       "Define multi-step agent workflows — such as 'on new contract upload, extract key terms, check against playbook, draft a redline, and notify me' — that chain Verdictu's research, document, and drafting capabilities without re-prompting at every step. Time- or event-triggered automations handle recurring work like docket checks and deadline reminders, surfaced as notifications instead of relying on you to remember to ask.",
+  },
+  {
+    id: "case-simulator",
+    icon: GitBranch,
+    title: "Case Outcome Simulator",
+    shortDescription:
+      "Enter your facts and evidence, run the case forward, and see where it's likely to break — before you're in front of a judge.",
+    fullDescription:
+      "Modeled on the litigation-analytics workflow pioneered by tools like Lex Machina, Premonition, and Blue J Legal — input your facts, jurisdiction, court, and the other side's position, and Verdictu runs a probability-weighted simulation against comparable case outcomes and precedent. Where those tools stop at a prediction, Verdictu goes further: because it runs on our own private, uncensored legal models instead of a sanitized general-purpose one, it will tell you plainly where your case is weak and hand you a concrete improvement plan — evidence to gather, arguments to reframe, procedural moves to make — instead of a score with no path forward.",
+  },
+  {
+    id: "document-redaction",
+    icon: ScanEye,
+    title: "Local PII & GDPR Redaction",
+    shortDescription:
+      "A local model scans your documents and masks names, IDs, and other sensitive data before anything reaches an AI model.",
+    fullDescription:
+      "Everyone is already sending documents to AI — so before yours reaches any model, cloud or otherwise, a local, on-device model scans it and masks GDPR and other sensitive personal data: names, addresses, national ID and case numbers, emails, phone numbers, financial details. It runs fully client-side in the browser sandbox on web, and with a larger, more accurate local model on desktop for messy scans and bulk files. You hold the key to unmask the output locally, so you get full AI assistance on a document without ever exposing client PII to a third-party model.",
+  },
+  {
+    id: "goal-mode",
+    icon: Target,
+    title: "Goal Mode — Sandboxed Autonomous Agent",
+    shortDescription:
+      "Set a goal and the rules for reaching it, and let the agent work toward it autonomously inside a locked-down sandbox.",
+    fullDescription:
+      "Set a goal, define what counts as 'done,' and specify the rules and guardrails the agent must follow — similar to ChatGPT's task/agent mode, purpose-built for legal work. Verdictu then works toward that goal autonomously: researching, drafting, browsing court portals, even operating a computer, checking in only when it hits a rule you set or a decision only you can make. Every action runs inside an isolated sandbox, and only the tools and sites you explicitly grant access to are ever reachable — nothing touches your real browser, files, or accounts unless you allow it.",
   },
 ];
