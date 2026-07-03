@@ -36,7 +36,7 @@ export const FeaturesGrid = () => {
         size="3xl"
         font="lora"
         weight="medium"
-        className="mb-10 block text-center"
+        className="mb-15 block text-center"
       >
         Discover what Verdictu can accomplish for you
       </Text>
