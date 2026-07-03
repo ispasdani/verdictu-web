@@ -22,21 +22,30 @@ const rows = chunk(FEATURES, COLUMNS);
 
 export const FeaturesGrid = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selectedFeature = FEATURES.find((feature) => feature.id === selectedId) ?? null;
+  const selectedFeature =
+    FEATURES.find((feature) => feature.id === selectedId) ?? null;
 
   const toggleFeature = (id: string) => {
     setSelectedId((current) => (current === id ? null : id));
   };
 
   return (
-    <Container as="section" className="mx-auto max-w-5xl px-6 py-24">
-      <Text as="h2" size="3xl" font="lora" weight="medium" className="mb-10 block text-center">
+    <Container as="section" className="mx-auto w-full my-15">
+      <Text
+        as="h2"
+        size="3xl"
+        font="lora"
+        weight="medium"
+        className="mb-10 block text-center"
+      >
         Discover what Verdictu can accomplish for you
       </Text>
 
       <div className="flex flex-col gap-4">
         {rows.map((row) => {
-          const rowHasSelected = row.some((feature) => feature.id === selectedId);
+          const rowHasSelected = row.some(
+            (feature) => feature.id === selectedId,
+          );
 
           return (
             <div key={row[0]!.id} className="flex flex-col gap-4">

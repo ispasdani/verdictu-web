@@ -7,7 +7,10 @@ type FeatureExpandedPanelProps = {
   onClose: () => void;
 };
 
-export const FeatureExpandedPanel = ({ feature, onClose }: FeatureExpandedPanelProps) => {
+export const FeatureExpandedPanel = ({
+  feature,
+  onClose,
+}: FeatureExpandedPanelProps) => {
   const Icon = feature.icon;
 
   return (
@@ -15,7 +18,10 @@ export const FeatureExpandedPanel = ({ feature, onClose }: FeatureExpandedPanelP
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-muted">
-            <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} />
+            <Icon
+              className="h-4 w-4 text-muted-foreground"
+              strokeWidth={1.75}
+            />
           </span>
           <Text as="h3" size="lg" weight="semibold" className="block">
             {feature.title}
@@ -31,11 +37,11 @@ export const FeatureExpandedPanel = ({ feature, onClose }: FeatureExpandedPanelP
         </button>
       </div>
 
-      <Text size="sm" color="muted" className="mt-4 block max-w-3xl">
+      <Text size="sm" color="muted" className="mt-4 block">
         {feature.fullDescription}
       </Text>
 
-      <div className="mt-6 flex aspect-video w-full max-w-3xl items-center justify-center rounded-xl border border-dashed border-border bg-muted/50">
+      <div className="mt-6 flex aspect-video w-full  items-center justify-center rounded-xl border border-dashed border-border bg-muted/50">
         <div className="flex flex-col items-center gap-2 text-muted-foreground">
           <PlayCircle className="h-8 w-8" strokeWidth={1.5} />
           <Text size="xs" color="muted">
