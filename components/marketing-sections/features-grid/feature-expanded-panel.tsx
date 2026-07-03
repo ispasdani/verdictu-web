@@ -23,7 +23,13 @@ export const FeatureExpandedPanel = ({
               strokeWidth={1.75}
             />
           </span>
-          <Text as="h3" size="lg" weight="semibold" className="block">
+          <Text
+            as="h3"
+            size="lg"
+            weight="semibold"
+            className="block"
+            font="lora"
+          >
             {feature.title}
           </Text>
         </div>

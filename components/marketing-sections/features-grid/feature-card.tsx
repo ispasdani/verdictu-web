@@ -8,7 +8,11 @@ type FeatureCardProps = {
   onClick: () => void;
 };
 
-export const FeatureCard = ({ feature, isSelected, onClick }: FeatureCardProps) => {
+export const FeatureCard = ({
+  feature,
+  isSelected,
+  onClick,
+}: FeatureCardProps) => {
   const Icon = feature.icon;
 
   return (
@@ -24,7 +28,7 @@ export const FeatureCard = ({ feature, isSelected, onClick }: FeatureCardProps) 
       )}
     >
       <div className="flex flex-col gap-1.5">
-        <Text as="h3" size="sm" weight="semibold" className="block">
+        <Text as="h3" size="sm" weight="semibold" className="block" font="lora">
           {feature.title}
         </Text>
         <Text size="xs" color="muted" className="line-clamp-2 block">
