@@ -36,9 +36,22 @@ export const FeatureCard = ({
         </Text>
       </div>
 
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
-        <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} />
-      </span>
+      <div className="flex items-center gap-3">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
+          <Icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.75} />
+        </span>
+
+        <span className="relative h-px flex-1 overflow-hidden bg-border">
+          <span
+            className={cn(
+              "absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-neutral-900 transition-transform duration-500 ease-out dark:bg-white",
+              isSelected
+                ? "scale-x-100"
+                : "group-hover:scale-x-100",
+            )}
+          />
+        </span>
+      </div>
     </button>
   );
 };
