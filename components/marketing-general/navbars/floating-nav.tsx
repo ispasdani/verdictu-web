@@ -2,7 +2,7 @@
 
 import { Logo } from "@/components/shared-components/logo";
 import { Text } from "@/components/shared-components/text";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shared-components/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -40,7 +40,11 @@ export const FloatingNav = ({
         ))}
       </div>
       <div className="flex items-center gap-2">
-        <Button>Start building</Button>
+        <Button variant="primary">
+                  <Text size="sm" color="inverted" weight="light">
+                    Get started
+                  </Text>
+                </Button> 
       </div>
     </div>
   );
