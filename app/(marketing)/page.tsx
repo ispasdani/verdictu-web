@@ -2,6 +2,7 @@ import Herobox from "@/components/marketing-sections/hero/hero";
 import { FeaturesGrid } from "@/components/marketing-sections/features-grid/features-grid";
 import { Subheading } from "@/components/shared-components/subheading";
 import { ArticlesFeed } from "@/components/marketing-sections/articles-feed/articles-feed";
+import OurMission from "@/components/marketing-sections/our-mission/our-mission";
 
 export default function HomePage() {
   return (
@@ -19,6 +20,7 @@ export default function HomePage() {
         </Subheading>
         <ArticlesFeed />
       </div>
+      <OurMission />
     </div>
   );
 }
