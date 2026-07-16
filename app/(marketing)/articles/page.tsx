@@ -23,7 +23,7 @@ export default async function ArticlesPage({
     : allArticles;
 
   return (
-    <div className="flex flex-col h-full max-w-[95rem] w-full mx-auto px-4 py-8 lg:py-12">
+    <div className="flex flex-col h-full w-full mx-auto py-8 lg:py-12">
       <div className="mb-8 flex flex-col gap-2 border-b border-border pb-8">
         <Text as="h1" size="4xl" font="lora" weight="medium" className="block">
           Articles
@@ -35,7 +35,8 @@ export default async function ArticlesPage({
         {label && (
           <div className="mt-2 flex items-center gap-2">
             <Text size="sm" color="muted" className="block">
-              Filtered by <span className="font-medium text-foreground">{label}</span>
+              Filtered by{" "}
+              <span className="font-medium text-foreground">{label}</span>
             </Text>
             <Link
               href="/articles"
