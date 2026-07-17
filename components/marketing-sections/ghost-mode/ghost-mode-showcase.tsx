@@ -18,7 +18,7 @@ const GhostModeShowcase = () => {
         <Image fill src="/assets/images/ghost-mode-section.webp" alt="Ghost Mode Background" className="object-cover" />
         {/* <div className="absolute inset-0 h-[760px] rounded-md bg-gradient-to-br from-neutral-900 via-neutral-800 to-black" /> */}
 
-        <div className="relative z-10 flex h-full items-center justify-center px-4 py-10 md:px-10 md:py-16">
+        <div className="relative z-10 flex h-full items-center justify-center px-4 py-4 md:px-10 md:py-10">
           <GhostModeDemo />
         </div>
       </div>

@@ -172,17 +172,17 @@ export const GhostModeDemo = () => {
   return (
     <div
       className={cn(
-        "relative w-full max-w-[90%] transition-opacity duration-700",
+        "relative w-full max-w-[90%] h-full max-h-[90%] transition-opacity duration-700",
         fading ? "opacity-0" : "opacity-100",
       )}
       aria-hidden
     >
       {/* Glass shell — same treatment as the hero chat bubble */}
-      <div className="rounded-[18px] bg-white/15 p-2 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-[16px] sm:p-3">
+      <div className="h-full rounded-[18px] bg-white/15 p-2 shadow-[0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur-[16px] sm:p-3">
         {/* App window */}
         <div
           className={cn(
-            "flex overflow-hidden rounded-xl border transition-colors duration-700",
+            "h-full flex overflow-hidden rounded-xl border transition-colors duration-700",
             ghost
               ? "border-violet-500/30 bg-neutral-950"
               : "border-neutral-200 bg-white",
