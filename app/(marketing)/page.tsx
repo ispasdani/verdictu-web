@@ -3,12 +3,14 @@ import { FeaturesGrid } from "@/components/marketing-sections/features-grid/feat
 import { Subheading } from "@/components/shared-components/subheading";
 import { ArticlesFeed } from "@/components/marketing-sections/articles-feed/articles-feed";
 import OurMission from "@/components/marketing-sections/our-mission/our-mission";
+import GhostModeShowcase from "@/components/marketing-sections/ghost-mode/ghost-mode-showcase";
 
 export default function HomePage() {
   return (
     <div>
       <Herobox />
       <FeaturesGrid />
+      <GhostModeShowcase />
 
       <div className="flex flex-col h-full w-full mx-auto  lg:pt-0 sm:pt-4 xs:pt-2 lg:pb-4 md:pb-4 sm:pb-2 xs:pb-2">
         <Subheading
