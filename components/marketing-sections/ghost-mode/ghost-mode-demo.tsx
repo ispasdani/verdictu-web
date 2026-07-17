@@ -172,7 +172,7 @@ export const GhostModeDemo = () => {
   return (
     <div
       className={cn(
-        "relative w-full max-w-[1100px] transition-opacity duration-700",
+        "relative w-full max-w-[90%] transition-opacity duration-700",
         fading ? "opacity-0" : "opacity-100",
       )}
       aria-hidden
