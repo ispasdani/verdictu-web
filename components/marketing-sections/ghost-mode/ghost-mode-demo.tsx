@@ -39,13 +39,14 @@ const T = {
   loop: 19400,
 };
 
-const Q1 = "Can my landlord evict me without any notice?";
+const Q1 =
+  "I got a parking ticket, but the sign was hidden behind an overgrown tree. Can I fight it?";
 const A1 =
-  "No — in most jurisdictions your landlord must serve written notice and follow a formal process. I can draft a response letter contesting the eviction.";
-const Q2 = "Yes, draft the letter.";
-const A2 = "Generating your response letter…";
+  "Yes — obscured or non-compliant signage is one of the strongest grounds for appeal. If the restriction wasn't clearly visible, the citation can be dismissed. I can draft an appeal letter with the right legal basis.";
+const Q2 = "Yes, draft the appeal.";
+const A2 = "Generating your appeal letter…";
 const A3 =
-  "Done — your letter is ready to review. Nothing is saved after this session.";
+  "Done — your appeal is ready to submit. Nothing is saved after this session.";
 
 type DocLine =
   | { kind: "title"; text: string }
@@ -53,15 +54,15 @@ type DocLine =
   | { kind: "bar"; width: string };
 
 const DOC_LINES: DocLine[] = [
-  { kind: "title", text: "RE: Response to Eviction Notice" },
-  { kind: "text", text: "Dear Mr. Thompson," },
+  { kind: "title", text: "RE: Appeal of Parking Citation #4471-A" },
+  { kind: "text", text: "To the Parking Adjudication Office," },
   { kind: "bar", width: "w-full" },
   { kind: "bar", width: "w-11/12" },
   { kind: "bar", width: "w-full" },
   { kind: "bar", width: "w-4/5" },
   { kind: "bar", width: "w-10/12" },
-  { kind: "text", text: "Sincerely," },
-  { kind: "text", text: "The Tenant" },
+  { kind: "text", text: "Respectfully," },
+  { kind: "text", text: "The Appellant" },
 ];
 
 const useLoopClock = () => {
@@ -171,7 +172,7 @@ export const GhostModeDemo = () => {
   return (
     <div
       className={cn(
-        "relative w-full max-w-[860px] transition-opacity duration-700",
+        "relative w-full max-w-[1100px] transition-opacity duration-700",
         fading ? "opacity-0" : "opacity-100",
       )}
       aria-hidden
@@ -497,7 +498,7 @@ export const GhostModeDemo = () => {
 
       {/* Document panel — pops out over the right edge like a desktop window */}
       {showDoc && (
-        <div className="animate-in fade-in zoom-in-95 slide-in-from-right-4 absolute -right-2 top-14 z-20 w-[58%] max-w-[320px] duration-300 sm:-right-6 md:-right-10">
+        <div className="animate-in fade-in zoom-in-95 slide-in-from-right-4 absolute -right-2 top-14 z-20 w-[58%] max-w-[380px] duration-300 sm:-right-6 md:-right-12">
           <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-[0_16px_50px_rgba(0,0,0,0.55)]">
             <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2">
               <div className="flex items-center gap-1.5">
@@ -506,7 +507,7 @@ export const GhostModeDemo = () => {
                 <span className="h-2 w-2 rounded-full bg-[#28c840]" />
               </div>
               <span className="font-[Inter,sans-serif] text-[11px] font-medium text-neutral-300">
-                response-letter.docx
+                parking-appeal.docx
               </span>
               <span
                 className={cn(

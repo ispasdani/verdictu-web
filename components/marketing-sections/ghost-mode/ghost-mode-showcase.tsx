@@ -12,11 +12,11 @@ const GhostModeShowcase = () => {
         stored once you leave.
       </Text>
 
-      <div className="relative mt-8">
+      <div className="relative mt-8 h-[760px]">
         {/* Placeholder background — swap for an <Image fill /> like the hero section */}
-        <div className="absolute inset-0 rounded-md bg-gradient-to-br from-neutral-900 via-neutral-800 to-black" />
+        <div className="absolute inset-0 h-[760px] rounded-md bg-gradient-to-br from-neutral-900 via-neutral-800 to-black" />
 
-        <div className="relative z-10 flex justify-center px-4 py-10 md:px-16 md:py-16">
+        <div className="relative z-10 flex h-full items-center justify-center px-4 py-10 md:px-10 md:py-16">
           <GhostModeDemo />
         </div>
       </div>
