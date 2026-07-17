@@ -14,29 +14,29 @@ import { useEffect, useState } from "react";
  */
 
 const T = {
-  ghostOn: 700,
-  ddOpen: 1400,
-  ddHighlight: 2000,
-  ddClose: 2600,
-  loadStart: 2600,
-  loadEnd: 3500,
-  q1Start: 3700,
+  ghostOn: 1700,
+  ddOpen: 2400,
+  ddHighlight: 3000,
+  ddClose: 3600,
+  loadStart: 3600,
+  loadEnd: 4500,
+  q1Start: 4700,
   q1Dur: 2000,
-  q1Send: 6000,
-  think1End: 7000,
-  a1Start: 7000,
+  q1Send: 7000,
+  think1End: 8000,
+  a1Start: 8000,
   a1Dur: 2800,
-  q2Start: 10300,
+  q2Start: 11300,
   q2Dur: 1000,
-  q2Send: 11600,
-  think2End: 12300,
-  a2Start: 12300,
-  docPop: 12900,
-  docLinesStart: 13100,
+  q2Send: 12600,
+  think2End: 13300,
+  a2Start: 13300,
+  docPop: 13900,
+  docLinesStart: 14100,
   docLineEvery: 360,
-  a3Start: 16400,
-  fadeStart: 18400,
-  loop: 19400,
+  a3Start: 17400,
+  fadeStart: 19400,
+  loop: 20400,
 };
 
 const Q1 =
@@ -340,20 +340,19 @@ export const GhostModeDemo = () => {
               </div>
             </div>
 
-            {/* Ghost banner */}
+            {/* Ghost banner — space is always reserved so the card height
+                never differs between Normal and Ghost mode; only color/opacity animate */}
             <div
               className={cn(
-                "grid transition-[grid-template-rows] duration-500",
-                ghost ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                "flex items-center gap-1.5 border-b px-3 py-1.5 font-[Inter,sans-serif] text-[11px] transition-colors duration-500",
+                ghost
+                  ? "border-violet-500/20 bg-violet-600/15 text-violet-300 opacity-100"
+                  : "border-neutral-200 bg-transparent text-transparent opacity-0",
               )}
             >
-              <div className="overflow-hidden">
-                <div className="flex items-center gap-1.5 border-b border-violet-500/20 bg-violet-600/15 px-3 py-1.5 font-[Inter,sans-serif] text-[11px] text-violet-300">
-                  <GhostIcon />
-                  Ghost Mode — no history · no training · everything deleted
-                  when you leave
-                </div>
-              </div>
+              <GhostIcon />
+              Ghost Mode — no history · no training · everything deleted when
+              you leave
             </div>
 
             {/* Chat area */}
