@@ -35,8 +35,20 @@ const T = {
   docLinesStart: 14100,
   docLineEvery: 360,
   a3Start: 17400,
-  fadeStart: 19400,
-  loop: 20400,
+  q3Start: 18300,
+  q3Dur: 1500,
+  q3Send: 20400,
+  think3End: 21200,
+  a4Start: 21200,
+  a4Dur: 3000,
+  q4Start: 24800,
+  q4Dur: 1200,
+  q4Send: 26300,
+  think4End: 27100,
+  a5Start: 27100,
+  a5Dur: 2800,
+  fadeStart: 30600,
+  loop: 31600,
 };
 
 const Q1 =
@@ -47,6 +59,19 @@ const Q2 = "Yes, draft the appeal.";
 const A2 = "Generating your appeal letter…";
 const A3 =
   "Done — your appeal is ready to submit. Nothing is saved after this session.";
+const Q3 = "Can any of this be traced back to me later?";
+const A4 =
+  "No. Ghost sessions are never logged, indexed, or used for training. The moment you close this tab, the transcript and the draft are gone — there's no record left to trace.";
+const Q4 = "How long do I have to file it?";
+const A5 =
+  "Most councils allow 28 days from the citation date. Yours is dated the 3rd, so you have until the 31st — I've put the deadline at the top of the letter.";
+
+const QUESTIONS = [
+  { text: Q1, start: T.q1Start, dur: T.q1Dur, send: T.q1Send },
+  { text: Q2, start: T.q2Start, dur: T.q2Dur, send: T.q2Send },
+  { text: Q3, start: T.q3Start, dur: T.q3Dur, send: T.q3Send },
+  { text: Q4, start: T.q4Start, dur: T.q4Dur, send: T.q4Send },
+];
 
 type DocLine =
   | { kind: "title"; text: string }
@@ -71,7 +96,7 @@ const useLoopClock = () => {
   useEffect(() => {
     // Respect reduced motion: freeze on the finished scene instead of animating.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setT(T.a3Start + 200);
+      setT(T.a5Start + T.a5Dur + 200);
       return;
     }
     // Interval (not rAF) so the clock keeps correct time even when the
@@ -139,12 +164,12 @@ export const GhostModeDemo = () => {
   const modelSelected = t >= T.ddClose;
   const loading = t >= T.loadStart && t < T.loadEnd;
 
-  const q1Typed = t < T.q1Send ? typed(t, Q1, T.q1Start, T.q1Dur) : "";
-  const q2Typed =
-    t >= T.q2Start && t < T.q2Send ? typed(t, Q2, T.q2Start, T.q2Dur) : "";
-  const inputText = t < T.q2Start ? q1Typed : q2Typed;
-  const isTyping =
-    (t >= T.q1Start && t < T.q1Send) || (t >= T.q2Start && t < T.q2Send);
+  // Whichever question is currently being typed into the composer, if any.
+  const composing = QUESTIONS.find((q) => t >= q.start && t < q.send);
+  const inputText = composing
+    ? typed(t, composing.text, composing.start, composing.dur)
+    : "";
+  const isTyping = Boolean(composing);
 
   const showUser1 = t >= T.q1Send;
   const thinking1 = t >= T.q1Send && t < T.think1End;
@@ -153,6 +178,12 @@ export const GhostModeDemo = () => {
   const thinking2 = t >= T.q2Send && t < T.think2End;
   const showA2 = t >= T.a2Start;
   const docDone = t >= T.a3Start;
+  const showUser3 = t >= T.q3Send;
+  const thinking3 = t >= T.q3Send && t < T.think3End;
+  const a4Text = typed(t, A4, T.a4Start, T.a4Dur);
+  const showUser4 = t >= T.q4Send;
+  const thinking4 = t >= T.q4Send && t < T.think4End;
+  const a5Text = typed(t, A5, T.a5Start, T.a5Dur);
 
   const showDoc = t >= T.docPop;
   const docLineCount = Math.max(
@@ -163,9 +194,7 @@ export const GhostModeDemo = () => {
     ),
   );
 
-  const sending =
-    (t >= T.q1Send - 250 && t < T.q1Send + 150) ||
-    (t >= T.q2Send - 250 && t < T.q2Send + 150);
+  const sending = QUESTIONS.some((q) => t >= q.send - 250 && t < q.send + 150);
   const togglePulse = t >= T.ghostOn - 200 && t < T.ghostOn + 500;
   const fading = t >= T.fadeStart;
 
@@ -184,74 +213,39 @@ export const GhostModeDemo = () => {
           className={cn(
             "h-full flex overflow-hidden rounded-xl border transition-colors duration-700",
             ghost
-              ? "border-violet-500/30 bg-neutral-950"
+              ? "border-violet-500/30 bg-white"
               : "border-neutral-200 bg-white",
           )}
         >
           {/* Sidebar rail — mirrors the agent layout */}
-          <div
-            className={cn(
-              "hidden w-12 shrink-0 flex-col items-center gap-3 border-r py-3 transition-colors duration-700 sm:flex",
-              ghost
-                ? "border-white/10 bg-neutral-900"
-                : "border-neutral-200 bg-neutral-50",
-            )}
-          >
+          <div className="hidden w-12 shrink-0 flex-col items-center gap-3 border-r border-neutral-200 bg-neutral-50 py-3 sm:flex">
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-violet-600 font-[Inter,sans-serif] text-xs font-semibold text-white">
               V
             </div>
             {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-6 w-6 rounded-md",
-                  ghost ? "bg-white/10" : "bg-neutral-200",
-                )}
-              />
+              <div key={i} className="h-6 w-6 rounded-md bg-neutral-200" />
             ))}
           </div>
 
           {/* Main column */}
           <div className="flex min-w-0 flex-1 flex-col">
             {/* Header */}
-            <div
-              className={cn(
-                "flex h-11 items-center gap-2 border-b px-3 transition-colors duration-700",
-                ghost ? "border-white/10" : "border-neutral-200",
-              )}
-            >
+            <div className="flex h-11 items-center gap-2 border-b border-neutral-200 px-3">
               {/* Traffic dots */}
               <div className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               </div>
-              <div
-                className={cn(
-                  "mx-1 h-4 w-px",
-                  ghost ? "bg-white/15" : "bg-neutral-200",
-                )}
-              />
-              <span
-                className={cn(
-                  "font-[Inter,sans-serif] text-xs font-medium",
-                  ghost ? "text-white" : "text-neutral-900",
-                )}
-              >
+              <div className="mx-1 h-4 w-px bg-neutral-200" />
+              <span className="font-[Inter,sans-serif] text-xs font-medium text-neutral-900">
                 Verdictu Agent
               </span>
 
               <div className="ml-auto flex items-center gap-2">
                 {/* Model selector */}
                 <div className="relative">
-                  <div
-                    className={cn(
-                      "flex items-center gap-1 rounded-full border px-2.5 py-1 font-[Inter,sans-serif] text-[11px] font-medium transition-colors duration-500",
-                      ghost
-                        ? "border-white/15 text-neutral-200"
-                        : "border-neutral-200 text-neutral-600",
-                    )}
-                  >
+                  <div className="flex items-center gap-1 rounded-full border border-neutral-200 px-2.5 py-1 font-[Inter,sans-serif] text-[11px] font-medium text-neutral-600">
                     {modelSelected ? "✦ Claude Opus" : "Select model"}
                     <svg
                       width="8"
@@ -273,7 +267,7 @@ export const GhostModeDemo = () => {
                   </div>
 
                   {dropdownOpen && (
-                    <div className="animate-in fade-in slide-in-from-top-1 absolute right-0 top-full z-30 mt-1.5 w-44 rounded-lg border border-white/10 bg-neutral-900 p-1 font-[Inter,sans-serif] shadow-[0_8px_30px_rgba(0,0,0,0.5)] duration-200">
+                    <div className="animate-in fade-in slide-in-from-top-1 absolute right-0 top-full z-30 mt-1.5 w-44 rounded-lg border border-neutral-200 bg-white p-1 font-[Inter,sans-serif] shadow-[0_8px_30px_rgba(0,0,0,0.12)] duration-200">
                       {[
                         { name: "Claude Haiku", tag: "fast" },
                         { name: "Claude Sonnet", tag: "balanced" },
@@ -288,7 +282,7 @@ export const GhostModeDemo = () => {
                               "flex items-center justify-between rounded-md px-2.5 py-1.5 text-[11px] transition-colors duration-200",
                               highlighted
                                 ? "bg-violet-600 text-white"
-                                : "text-neutral-300",
+                                : "text-neutral-700",
                             )}
                           >
                             <span className="font-medium">{m.name}</span>
@@ -320,9 +314,7 @@ export const GhostModeDemo = () => {
                   <span
                     className={cn(
                       "rounded-full px-2.5 py-0.5 transition-colors duration-500",
-                      !ghost
-                        ? "bg-neutral-900 text-white"
-                        : "text-neutral-500",
+                      !ghost ? "bg-neutral-900 text-white" : "text-neutral-500",
                     )}
                   >
                     Normal
@@ -346,7 +338,7 @@ export const GhostModeDemo = () => {
               className={cn(
                 "flex items-center gap-1.5 border-b px-3 py-1.5 font-[Inter,sans-serif] text-[11px] transition-colors duration-500",
                 ghost
-                  ? "border-violet-500/20 bg-violet-600/15 text-violet-300 opacity-100"
+                  ? "border-violet-500/20 bg-violet-600/10 text-violet-700 opacity-100"
                   : "border-neutral-200 bg-transparent text-transparent opacity-0",
               )}
             >
@@ -375,12 +367,7 @@ export const GhostModeDemo = () => {
                           ghost ? "text-violet-500" : "text-neutral-300",
                         )}
                       />
-                      <span
-                        className={cn(
-                          "max-w-[240px] font-[Inter,sans-serif] text-[11px] transition-colors duration-700",
-                          ghost ? "text-neutral-400" : "text-neutral-400",
-                        )}
-                      >
+                      <span className="max-w-[240px] font-[Inter,sans-serif] text-[11px] text-neutral-400">
                         {ghost
                           ? "Ghost session ready — messages vanish when you're done."
                           : "Ask anything about your legal situation."}
@@ -389,6 +376,10 @@ export const GhostModeDemo = () => {
                   )}
                 </div>
               )}
+
+              {/* Older messages scroll out of the fixed-height area; fade the
+                  cut so it reads as scrollback instead of a hard clip. */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-white to-transparent" />
 
               {/* Messages — pinned to the bottom so new ones stay in view */}
               <div className="flex h-full flex-col justify-end gap-2.5 font-[Inter,sans-serif] text-[13px] leading-relaxed">
@@ -405,12 +396,7 @@ export const GhostModeDemo = () => {
                 {t >= T.a1Start && (
                   <div className="flex gap-2">
                     <span className="mt-1 text-xs text-violet-400">✦</span>
-                    <div
-                      className={cn(
-                        "max-w-[85%]",
-                        ghost ? "text-neutral-200" : "text-neutral-800",
-                      )}
-                    >
+                    <div className="max-w-[85%] text-neutral-800">
                       {a1Text}
                       {a1Text.length < A1.length && (
                         <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-violet-400 align-middle" />
@@ -432,15 +418,54 @@ export const GhostModeDemo = () => {
                 {showA2 && (
                   <div className="animate-in fade-in slide-in-from-bottom-2 flex gap-2 duration-300">
                     <span className="mt-1 text-xs text-violet-400">✦</span>
-                    <div
-                      className={cn(
-                        "flex items-center gap-2",
-                        ghost ? "text-neutral-200" : "text-neutral-800",
-                      )}
-                    >
+                    <div className="flex items-center gap-2 text-neutral-800">
                       {docDone ? A3 : A2}
                       {!docDone && (
                         <span className="h-3 w-3 animate-spin rounded-full border-[1.5px] border-violet-500 border-t-transparent" />
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {showUser3 && (
+                  <div className="animate-in fade-in slide-in-from-bottom-2 flex justify-end duration-300">
+                    <div className="max-w-[75%] rounded-2xl rounded-br-md bg-violet-600 px-3.5 py-2 text-white">
+                      {Q3}
+                    </div>
+                  </div>
+                )}
+
+                {thinking3 && <ThinkingDots />}
+
+                {t >= T.a4Start && (
+                  <div className="flex gap-2">
+                    <span className="mt-1 text-xs text-violet-400">✦</span>
+                    <div className="max-w-[85%] text-neutral-800">
+                      {a4Text}
+                      {a4Text.length < A4.length && (
+                        <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-violet-400 align-middle" />
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {showUser4 && (
+                  <div className="animate-in fade-in slide-in-from-bottom-2 flex justify-end duration-300">
+                    <div className="max-w-[75%] rounded-2xl rounded-br-md bg-violet-600 px-3.5 py-2 text-white">
+                      {Q4}
+                    </div>
+                  </div>
+                )}
+
+                {thinking4 && <ThinkingDots />}
+
+                {t >= T.a5Start && (
+                  <div className="flex gap-2">
+                    <span className="mt-1 text-xs text-violet-400">✦</span>
+                    <div className="max-w-[85%] text-neutral-800">
+                      {a5Text}
+                      {a5Text.length < A5.length && (
+                        <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-violet-400 align-middle" />
                       )}
                     </div>
                   </div>
@@ -454,9 +479,7 @@ export const GhostModeDemo = () => {
                 <div className="flex items-start gap-2">
                   <div className="min-h-[24px] flex-1 py-[2px] font-[Inter,sans-serif] text-[13px] leading-[1.5] text-black">
                     {inputText.length === 0 && !isTyping ? (
-                      <span className="text-neutral-400">
-                        Type question...
-                      </span>
+                      <span className="text-neutral-400">Type question...</span>
                     ) : (
                       <>
                         {inputText}
@@ -498,22 +521,22 @@ export const GhostModeDemo = () => {
       {/* Document panel — pops out over the right edge like a desktop window */}
       {showDoc && (
         <div className="animate-in fade-in zoom-in-95 slide-in-from-right-4 absolute -right-2 top-14 z-20 w-[58%] max-w-[380px] duration-300 sm:-right-6 md:-right-12">
-          <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-[0_16px_50px_rgba(0,0,0,0.55)]">
-            <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2">
+          <div className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 shadow-[0_16px_50px_rgba(0,0,0,0.25)]">
+            <div className="flex items-center gap-2 border-b border-neutral-200 px-3 py-2">
               <div className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-[#ff5f57]" />
                 <span className="h-2 w-2 rounded-full bg-[#febc2e]" />
                 <span className="h-2 w-2 rounded-full bg-[#28c840]" />
               </div>
-              <span className="font-[Inter,sans-serif] text-[11px] font-medium text-neutral-300">
+              <span className="font-[Inter,sans-serif] text-[11px] font-medium text-neutral-700">
                 parking-appeal.docx
               </span>
               <span
                 className={cn(
                   "ml-auto rounded-full px-2 py-0.5 font-[Inter,sans-serif] text-[10px] font-medium",
                   docDone
-                    ? "bg-emerald-500/15 text-emerald-400"
-                    : "bg-violet-500/15 text-violet-300",
+                    ? "bg-emerald-500/15 text-emerald-600"
+                    : "bg-violet-500/15 text-violet-700",
                 )}
               >
                 {docDone ? "Ready" : "Writing…"}
