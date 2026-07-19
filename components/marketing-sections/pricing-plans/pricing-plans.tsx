@@ -11,7 +11,7 @@ import {
 export const PricingPlans = () => {
   return (
     <Container as="section" className="mx-auto w-full my-15">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {PRICING_PLANS.map((plan) => (
           <article
             key={plan.id}

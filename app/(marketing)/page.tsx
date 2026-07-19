@@ -4,6 +4,7 @@ import { Subheading } from "@/components/shared-components/subheading";
 import { ArticlesFeed } from "@/components/marketing-sections/articles-feed/articles-feed";
 import OurMission from "@/components/marketing-sections/our-mission/our-mission";
 import GhostModeShowcase from "@/components/marketing-sections/ghost-mode/ghost-mode-showcase";
+import { PricingTeaser } from "@/components/marketing-sections/pricing-teaser/pricing-teaser";
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Herobox />
       <FeaturesGrid />
       <GhostModeShowcase />
+      <PricingTeaser />
 
       <div className="flex flex-col h-full w-full mx-auto  lg:pt-0 sm:pt-4 xs:pt-2 lg:pb-4 md:pb-4 sm:pb-2 xs:pb-2">
         <Subheading

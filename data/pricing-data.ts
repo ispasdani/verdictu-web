@@ -10,9 +10,22 @@ export type PricingPlan = {
   cta: string;
   href: string;
   highlighted?: boolean;
+  oneTime?: boolean;
 };
 
 export const PRICING_PLANS: PricingPlan[] = [
+  {
+    id: "trial",
+    label: "Trial",
+    price: "€2",
+    period: "one-time, no subscription",
+    credits: "10 credits",
+    description:
+      "For a single simple action — try Verdictu once before committing to anything.",
+    cta: "Try it once",
+    href: "/credits?pack=trial",
+    oneTime: true,
+  },
   {
     id: "starter",
     label: "Starter",
@@ -77,7 +90,6 @@ export type CreditPack = {
 };
 
 export const CREDIT_PACKS: CreditPack[] = [
-  { id: "trial", label: "Trial", price: "€2", credits: "10 credits" },
   { id: "small", label: "Small", price: "€9", credits: "50 credits" },
   {
     id: "medium",
@@ -132,7 +144,7 @@ export const PRICING_FAQS: PricingFaqItem[] = [
   {
     question: "Is there a low-commitment way to try Verdictu?",
     answer:
-      "Yes — the Trial credit pack gives you a small number of credits for a couple of euros, no subscription required, so you can try a real query or a short document analysis before committing to a plan.",
+      "Yes — the Trial plan gives you a small number of credits for a couple of euros, no subscription required, so you can try a real query or a short document analysis before committing to a bigger plan.",
   },
   {
     question: "What payment methods do you accept?",
